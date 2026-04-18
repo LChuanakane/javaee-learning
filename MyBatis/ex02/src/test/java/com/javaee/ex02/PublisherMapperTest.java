@@ -1,5 +1,6 @@
 package com.javaee.ex02;
 
+import com.javaee.ex02.mapper.PublisherMapper;
 import com.javaee.ex02.po.Publisher;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -14,6 +15,10 @@ import java.io.Reader;
 @FixMethodOrder(MethodSorters.JVM)
 public class PublisherMapperTest {
     private SqlSessionFactory sqlSessionFactory;
+
+
+
+
     @Before
     public void createSqlSessionFactory(){
         try {
@@ -44,4 +49,24 @@ public class PublisherMapperTest {
         sqlSession.close();
     }
 
+
+    @Test
+    public void queryPublisher(){
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        int pubId = 1;
+        PublisherMapper mapper = sqlSession.getMapper(PublisherMapper.class);
+        Publisher publisherByPubId = mapper.findPublisherByPubId(pubId);
+        if(publisherByPubId == null){
+            throw new RuntimeException("该id对应记录不存在");
+        }
+
+        System.out.println(publisherByPubId);
+
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
 }
+
+
+
