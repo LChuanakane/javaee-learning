@@ -1,1 +1,1 @@
-# javaee-learning
+# 管理我的在校JavaEE项目,仅用于学习记录不作为个人产出
